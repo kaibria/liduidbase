@@ -1,0 +1,4 @@
+# alle Changesets sind hier included
+databaseChangeLog:
+  - includeAll:
+      path: db/changelog/changesets/

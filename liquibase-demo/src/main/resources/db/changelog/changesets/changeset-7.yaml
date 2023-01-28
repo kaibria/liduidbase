@@ -1,0 +1,37 @@
+# Aufgabe 6
+databaseChangeLog:
+  - changeSet:
+      id: 7
+      author: Kai Bria
+      comment: Tabelle category hinzugefügt mit einem Fremdschlüssel auf Articles
+      changes:
+        - addColumn:
+            tableName: articles
+            columns:
+              - column:
+                  name: category
+                  type: int
+        - createTable:
+            tableName: category
+            columns:
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: description
+                  type: varchar(255)
+            foreignKeys:
+              - foreignKey:
+                  foreignTableName: articles
+                  foreignColumnNames: name
+                  onDelete: CASCADE
+                  onUpdate: CASCADE
+                  columnNames: article_name
+      rollback:
+        - dropTable:
+            tableName: category
+        - dropColumn:
+            tableName: articles
+            columnName: category

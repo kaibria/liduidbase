@@ -1,0 +1,23 @@
+# Aufgabe 5
+databaseChangeLog:
+  - changeSet:
+      id: 6
+      author: Kai Bria
+      comment: createIndex in der Tabelle Articles
+      changes:
+        - createIndex:
+            indexName: title_index
+            tableName: articles
+            columns:
+              - column:
+                  descending: true
+                  name: title
+      preConditions:
+        - onFail: WARN
+        - sqlCheck:
+            expectedResult: 0
+            sql: select count(*) from DATABASECHANGELOGLOCK
+      rollback:
+        - dropIndex:
+            indexName: title_index
+            tableName: articles

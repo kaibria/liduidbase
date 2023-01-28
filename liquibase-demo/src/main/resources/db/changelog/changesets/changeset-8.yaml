@@ -1,0 +1,53 @@
+# Aufgabe 7
+databaseChangeLog:
+  - changeSet:
+      id: 8
+      author: Kai Bria
+      comment: Sample Data zu allen Tabellen
+      changes:
+        - insert:
+            tableName: articles
+            columns:
+              - column:
+                  name: id
+                  value: 2a77b036-9f07-11ed-a8fc-0242ac120002
+              - column:
+                  name: title
+                  value: "Sample Title"
+              - column:
+                  name: text
+                  value: "Sample Text"
+              - column:
+                  name: category
+                  value: 1
+        - insert:
+            tableName: category
+            columns:
+              - column:
+                  name: name
+                  value: "Sample Name"
+              - column:
+                  name: description
+                  value: "Sample Description"
+        - insert:
+            tableName: comments
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: text
+                  value: "Sample content"
+              - column:
+                  name: article_id
+                  value: 2a77b036-9f07-11ed-a8fc-0242ac120002
+      rollback:
+        - delete:
+            tableName: comments
+            where: "id = 1"
+        - delete:
+            tableName: category
+            where: "name = 'Sample Name'"
+        - delete:
+            tableName: articles
+            where: "id = '2a77b036-9f07-11ed-a8fc-0242ac120002'"

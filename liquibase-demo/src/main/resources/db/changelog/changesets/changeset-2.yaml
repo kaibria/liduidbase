@@ -1,0 +1,16 @@
+# Aufgabe 1
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: Kai Bria
+      comment: Maximale länge von Artikel von 255 auf 999 geändert
+      changes:
+        - modifyDataType:
+            columnName: text
+            newDataType: varchar(999)
+            tableName: article
+      rollback:
+        - modifyDataType:
+            columnName: text
+            newDataType: varchar(255)
+            tableName: article

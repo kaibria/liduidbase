@@ -1,0 +1,25 @@
+# Aufgabe 3
+databaseChangeLog:
+  - changeSet:
+      id: 4
+      author: Kai Bria
+      comment: Column version und Timestamp hinzugefügt
+      changes:
+        - addColumn:
+            tableName: articles
+            columns:
+              - column:
+                  name: version
+                  type: integer
+                  defaultValue: 1
+              - column:
+                  name: created_ts
+                  type: timestamp(6)
+                  defaultValue: ${NOW}
+      rollback:
+        - dropColumn:
+            columnName: version
+            tableName: articles
+        - dropColumn:
+            columnName: created_ts
+            tableName: articles
